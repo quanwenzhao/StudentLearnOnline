@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhao.mapper.UserMapper">
+
+    <resultMap id="testResultMap" type="User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="testResultMap" resultType="user">
+        select * from user
+    </select>
+
+    <insert id="insertUser" parameterType="user" >
+        insert into user (account,password) values (#{account},#{password})
+    </insert>
+
+    <delete id="deleteUserById" parameterType="int" >
+        delete from user where id=#{id};
+    </delete>
+
+    <update id="updateUser" parameterType="user" >
+        update user
+        set account = #{account},
+	        password = #{password},
+            status = #{status},
+            name = #{name},
+            nickName = #{nickName},
+            phone = #{phone},
+	        iconUrl = #{iconUrl},
+    </update>
+
+    <select id="selectUserById" parameterType="int" resultType="user">
+        select * from user where id=#{id}
+    </select>
+
+    <select id="selectUserByAccount" parameterType="String" resultType="user">
+        select * from user where account=#{account}
+    </select>
+
+    <select id="login" parameterType="String" resultType="user">
+        select * from user where account=#{account} and password=#{password}
+    </select>
+
+</mapper>
